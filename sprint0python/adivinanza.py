@@ -79,5 +79,5 @@ while fin != "No" :
     while fin != "Si" and fin != "No" :
         fin = input("¿Quieres volver a jugar? (Si/No): ")
         fin = fin.capitalize()
-print("estamos fuera")
+print("Estamos fuera")
 
