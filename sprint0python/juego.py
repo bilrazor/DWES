@@ -5,7 +5,7 @@ winH = 0
 winM = 0
 while jugadas != 5:
     opciones = ["piedra", "papel", "tijera"]
-    jugadas = jugadas + 1
+    jugadas +=  1
     print(f"Jugada numero {jugadas}")
     print("Juego de piedra , papel o tijera")
 
@@ -23,15 +23,15 @@ while jugadas != 5:
     print("mano lanzada -> "+manoH)
     print("mano de la maquina lanzada -> "+manoM)
 
-    if manoH == "piedra" and manoM == "tijera" or manoH == "papel" and manoM == "piedra" or manoH == "tijera" and manoM == "papel":
+    if manoH == opciones[0] and manoM == opciones[2] or manoH == opciones[1] and manoM == opciones[0] or manoH == opciones[2] and manoM == opciones[1]:
         print("ganasté")
-        winH = winH + 1
+        winH +=  1
     elif manoH == manoM :
         print("empate")
-        jugadas = jugadas - 1
+        jugadas -=  1
     else:
         print("perdisté")
-        winM = winM + 1
+        winM +=  1
 
 if winH > winM :
     print("ganasté la partida eres un CRACK")
