@@ -3,6 +3,7 @@ from no_window import NoWindow
 from yes_window import YesWindow
 
 class MainWindow:
+    # se utiliza estos botones para llamar a las respectivas clases
     def on_button_clickL(self):
         root = Tk()
         YesWindow(root)
