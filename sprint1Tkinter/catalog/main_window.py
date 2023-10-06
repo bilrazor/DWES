@@ -16,13 +16,22 @@ class MainWindow:
             Cell("Robot 4", "C:\\Users\\Alumno\\Documents\\GitHub\\DWES\\sprint1Tkinter\\catalog\\edited\\imagen4Edited.png"),
             Cell("Robot 5", "C:\\Users\\Alumno\\Documents\\GitHub\\DWES\\sprint1Tkinter\\catalog\\edited\\imagen5Edited.png")
         ]"""
-        self.cells = [
+        """self.cells = [
             Cell("Robot 1", "catalog\\edited\\imagen1Edited.png"),
             Cell("Robot 2", "catalog\\edited\\imagen2Edited.jpg"),
             Cell("Robot 3", "catalog\\edited\\imagen3Edited.png"),
             Cell("Robot 4", "catalog\\edited\\imagen4Edited.png"),
             Cell("Robot 5", "catalog\\edited\\imagen5Edited.png")
+        ]""" 
+
+        self.cells = [
+            Cell("Robot 1", "catalog\\unedited\\imagen1.png"),
+            Cell("Robot 2", "catalog\\unedited\\imagen2.png"),
+            Cell("Robot 3", "catalog\\unedited\\imagen3.png"),
+            Cell("Robot 4", "catalog\\unedited\\imagen4.jpg"),
+            Cell("Robot 5", "catalog\\unedited\\imagen5.png")
         ]
+
 
         for i, cell in enumerate(self.cells):
             label = ttk.Label(root, image=cell.image_tk, text=cell.title, compound="center")
