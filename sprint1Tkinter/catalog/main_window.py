@@ -1,13 +1,14 @@
 from tkinter import Tk, ttk, messagebox
 from cell import Cell
+from detail_window import DetailWindow
 
 class MainWindow:
     def on_button_clicked(self, cell):
-        message = " has hecho click en la celda " + cell.title
-        messagebox.showinfo("Información", message)
+        detail_window_root = Tk()
+        DetailWindow(detail_window_root, cell.path, cell.title, cell.description)
+        detail_window_root.mainloop()
 
     def __init__(self, root):
-        root.title("MainWindow")
 
         """self.cells = [
             Cell("Robot 1", "C:\\Users\\Alumno\\Documents\\GitHub\\DWES\\sprint1Tkinter\\catalog\\edited\\imagen1Edited.png"),
@@ -24,16 +25,12 @@ class MainWindow:
             Cell("Robot 5", "catalog\\edited\\imagen5Edited.png")
         ]""" 
 
+        root.title("MainWindow")
+
         self.cells = [
-            Cell("Robot 1", "catalog\\unedited\\imagen1.png"),
-            Cell("Robot 2", "catalog\\unedited\\imagen2.png"),
-            Cell("Robot 3", "catalog\\unedited\\imagen3.png"),
-            Cell("Robot 4", "catalog\\unedited\\imagen4.jpg"),
-            Cell("Robot 5", "catalog\\unedited\\imagen5.png")
+            Cell(root, "Robot 1", "catalog\\unedited\\imagen1.png", "Descripción del Robot 1"),
+            Cell(root, "Robot 2", "catalog\\unedited\\imagen2.png", "Descripción del Robot 2"),
+            Cell(root, "Robot 3", "catalog\\unedited\\imagen3.png", "Descripción del Robot 3"),
+            Cell(root, "Robot 4", "catalog\\unedited\\imagen4.jpg", "Descripción del Robot 4"),
+            Cell(root, "Robot 5", "catalog\\unedited\\imagen5.png", "Descripción del Robot 5")
         ]
-
-
-        for i, cell in enumerate(self.cells):
-            label = ttk.Label(root, image=cell.image_tk, text=cell.title, compound="center")
-            label.grid(row=i, column=0)
-            label.bind("<Button-1>", lambda event, cell=cell: self.on_button_clicked(cell))
