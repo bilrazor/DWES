@@ -1,24 +1,30 @@
 from tkinter import Frame, Label
 from PIL import Image, ImageTk
+from detail_window import DetailWindow
 
 class Cell:
+    
+    # Constructor de la clase Cell.
     def __init__(self, root, title, path, description):
         self.root = root
         self.title = title
         self.path = path
         self.description = description
-        
+
+        # Crea un frame para contener los elementos de esta celda.
         self.frame = Frame(self.root)
         self.frame.pack()
         
-        original_image = Image.open(self.path)
-        resized_image = original_image.resize((100, 100), Image.Resampling.LANCZOS)
-        self.image_tk = ImageTk.PhotoImage(resized_image)
+        # Abre y redimensiona la imagen, luego la muestra en una etiqueta.
+        image = Image.open(self.path).resize((100, 100), Image.Resampling.LANCZOS)
+        self.image_tk = ImageTk.PhotoImage(image)
+        label = Label(self.frame, image=self.image_tk)
+        label.pack()
+        
+        # Vincula un clic del botón izquierdo del ratón en la etiqueta al método show_detail.
+        label.bind('<Button-1>', self.show_detail)
 
-        self.label = Label(self.frame, image=self.image_tk)
-        self.label.pack()
-        self.label.bind('<Button-1>', self.show_detail)  # Vincula el clic del botón izquierdo del ratón al método show_detail
 
+    # Método para mostrar la ventana de detalles cuando se hace clic en esta celda.
     def show_detail(self, event):
-        from detail_window import DetailWindow  # Importación local para evitar importaciones circulares
         DetailWindow(self.root, self.path, self.title, self.description)

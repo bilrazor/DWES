@@ -1,5 +1,6 @@
 from tkinter import Tk , ttk
 
+# Definición de la clase YesWindow.
 class YesWindow:
     def __init__(self,root):
 
