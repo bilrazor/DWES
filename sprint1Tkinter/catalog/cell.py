@@ -23,9 +23,7 @@ class Cell:
         label = Label(self.frame, image=self.image_tk)
         label.pack()
         
-        #Descripción de la celda
-        Label(self.root, text=description, wraplength=200).pack()
-
+   
         # Vincula un clic del botón izquierdo del ratón en la etiqueta al método show_detail.
         label.bind('<Button-1>', self.show_detail)
 
