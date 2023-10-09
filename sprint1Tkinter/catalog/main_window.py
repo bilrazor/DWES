@@ -1,4 +1,5 @@
 from cell import Cell
+from tkinter import Label
 
 class MainWindow:
     # Constructor de la clase MainWindow.
@@ -16,3 +17,4 @@ class MainWindow:
             Cell(root, "Robot 4", "catalog\\unedited\\imagen4.jpg", "Descripción del Robot 4"*5),
             Cell(root, "Robot 5", "catalog\\unedited\\imagen5.png", "Descripción del Robot 5"*5)
         ]
+ 

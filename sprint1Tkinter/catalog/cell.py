@@ -10,6 +10,8 @@ class Cell:
         self.title = title
         self.path = path
         self.description = description
+        #titulo de la celda
+        Label(self.root, text=title).pack()
 
         # Crea un frame para contener los elementos de esta celda.
         self.frame = Frame(self.root)
@@ -21,6 +23,9 @@ class Cell:
         label = Label(self.frame, image=self.image_tk)
         label.pack()
         
+        #Descripción de la celda
+        Label(self.root, text=description, wraplength=200).pack()
+
         # Vincula un clic del botón izquierdo del ratón en la etiqueta al método show_detail.
         label.bind('<Button-1>', self.show_detail)
 
@@ -28,3 +33,4 @@ class Cell:
     # Método para mostrar la ventana de detalles cuando se hace clic en esta celda.
     def show_detail(self, event):
         DetailWindow(self.root, self.path, self.title, self.description)
+
