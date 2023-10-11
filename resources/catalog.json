@@ -1,0 +1,27 @@
+[
+        {
+            "name":"robot1",
+            "description":"robot1",
+            "url":"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"
+        },
+        {
+            "name":"robot2",
+            "description":"robot2",
+            "url":"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen2Edited.jpg"
+        },
+        {
+            "name":"robot3",
+            "description":"robot3",
+            "url":"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen3Edited.png"
+        },
+        {
+            "name":"robot4",
+            "description":"robot4",
+            "url":"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen4Edited.png"    
+        },
+        {
+            "name":"robot5",
+            "description":"robot5",
+            "url":"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen5Edited.png"
+        }
+]
