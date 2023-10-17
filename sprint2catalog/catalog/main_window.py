@@ -13,7 +13,9 @@ class MainWindow:
      def __init__(self, root, json_data):
         self.json_data = json_data
         self.root = root
-
+        
+         
+        
         def load_image_from_url(url):
             try:
                 response = requests.get(url)
@@ -37,5 +39,8 @@ class MainWindow:
                 cell = Cell(root, title, image_tk, description, image_url)
                 self.cells.append(cell)
 
- 
+        self.root.update_idletasks()
+        x = ( self.root.winfo_screenwidth() - self.root.winfo_reqwidth()) / 2
+        y = ( self.root.winfo_screenheight() - self.root.winfo_reqheight()) / 2
+        self.root.geometry(f"+{int(x)}+{int(y)}")
      
