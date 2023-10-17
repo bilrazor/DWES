@@ -3,11 +3,15 @@ import threading ,requests
 import time
 from PIL import Image,ImageTk
 from io import BytesIO
+import threading
+import requests
+from tkinter import Tk
+from main_window import MainWindow
 
 class LoadingWindow:
-    def __init__(self,root,on_complete):
-
-        self.on_complete = on_complete
+    def __init__(self,root):
+        self.json_data = None
+        self.data_ready = threading.Event()
         self.root = root
         self.root.title("Cargando...")
         self.root.geometry("170x120")
@@ -29,6 +33,26 @@ class LoadingWindow:
 
         self.thread = threading.Thread(target=self.fetch_json_data)
         self.thread.start()
+        self.check_data_ready()
+     
+    def fetch_json_data(self):
+        try:
+            response = requests.get("https://raw.githubusercontent.com/bilrazor/DWES/main/resources/catalog.json")
+            response.raise_for_status()  
+            self.json_data = response.json()
+            print(self.json_data)  # Imprime los datos para verificar
+            self.data_ready.set()
+        except requests.RequestException as e:
+            print(f"Error al recuperar datos: {e}")
+            self.root.after(0, self.root.destroy) 
+
+    def check_data_ready(self):
+        if not self.data_ready.is_set():
+            self.root.after(100, self.check_data_ready)  # Vuelve a verificar después de un corto período
+        else:
+            self.root.destroy() 
+
+ 
 
     def draw_progress_circle(self,progress):
         self.canvas.delete("progress")
@@ -46,18 +70,3 @@ class LoadingWindow:
         
         self.draw_progress_circle(self.progress)
         self.root.after(100,self.update_progress_circle)
-    def fetch_json_data(self):
-        # Simulación de una tarea de carga
-        response = requests.get("https://github.com/bilrazor/DWES/blob/main/resources/catalog.json")
-        
-        if response.status_code== 200:
-            json_data = response.json()
-            for item in json_data:
-                guardado = item
-            self.root.quit()
-            self.on_complete()        
-
-    def load_image_from_url(self,url):
-        response = requests.get(url)
-        img_data = Image.open(BytesIO(response.content))  
-        img = ImageTk.PhotoImage(img_data)

@@ -1,32 +1,27 @@
 from tkinter import Toplevel, Label, messagebox
 from PIL import Image, ImageTk
+import requests
+from io import BytesIO
 
 class DetailWindow:
-    # Constructor de la clase DetailWindow.
-    def __init__(self, root, image_path, title, description):
-        
-        # Crea una nueva ventana (Toplevel) para mostrar los detalles.
+    def __init__(self, root, image_url, title, description):
         self.root = Toplevel(root)  
         self.root.title("Detalle")
-        
-        # Crea y muestra una etiqueta con el título.
-        Label(self.root, text=title).pack()
-        
-        # Abre la imagen desde la ruta proporcionada y la muestra en una etiqueta.
-        image = Image.open(image_path)
-        photo = ImageTk.PhotoImage(image)
-        image_label = Label(self.root, image=photo)
-        image_label.photo = photo  # Mantiene una referencia a la imagen para evitar que se recoja como basura.
-        image_label.pack()
-        
-        # Verifica la longitud de la descripción y muestra un mensaje de error si es necesario.
-        # También ajusta la descripción a la longitud requerida si es necesario.
-        if len(description) < 100:
-            messagebox.showerror("Error", "La descripción es demasiado corta. Debe tener al menos 100 caracteres.")
-            description = description.ljust(100) 
-        elif len(description) > 200:
-            messagebox.showerror("Error", "La descripción es demasiado larga. Debe tener como máximo 200 caracteres.")
-            description = description[:200]  
 
-        # Crea y muestra una etiqueta con la descripción.
+        Label(self.root, text=title).pack()
+
+        # Descarga la imagen desde la URL
+        try:
+            response = requests.get(image_url)
+            response.raise_for_status()  # Lanza una excepción si la respuesta no es exitosa
+            image_bytes = BytesIO(response.content)  # BytesIO crea un objeto tipo archivo en memoria
+            image = Image.open(image_bytes)
+            photo = ImageTk.PhotoImage(image)
+            image_label = Label(self.root, image=photo)
+            image_label.image = photo 
+            image_label.pack()
+        except requests.RequestException as e:
+            print(f"Error al recuperar la imagen: {e}")
+            messagebox.showerror("Error", f"Error al cargar la imagen: {e}")
+
         Label(self.root, text=description, wraplength=200).pack()

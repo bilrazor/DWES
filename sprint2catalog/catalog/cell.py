@@ -5,11 +5,12 @@ from detail_window import DetailWindow
 class Cell:
     
     # Constructor de la clase Cell.
-    def __init__(self, root, title, path, description):
+    def __init__(self, root, title,image_tk, description,image_path):
         self.root = root
         self.title = title
-        self.path = path
+        self.image_tk = image_tk 
         self.description = description
+        self.image_path = image_path
         #titulo de la celda
         Label(self.root, text=title).pack()
 
@@ -18,9 +19,8 @@ class Cell:
         self.frame.pack()
         
         # Abre y redimensiona la imagen, luego la muestra en una etiqueta.
-        image = Image.open(self.path).resize((100, 100), Image.Resampling.LANCZOS)
-        self.image_tk = ImageTk.PhotoImage(image)
         label = Label(self.frame, image=self.image_tk)
+        label.image = self.image_tk  # Mantén una referencia a la imagen
         label.pack()
         
    
@@ -30,5 +30,5 @@ class Cell:
 
     # Método para mostrar la ventana de detalles cuando se hace clic en esta celda.
     def show_detail(self, event):
-        DetailWindow(self.root, self.path, self.title, self.description)
+        DetailWindow(self.root, self.image_path, self.title, self.description)
 
