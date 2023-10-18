@@ -5,6 +5,10 @@ from io import BytesIO
 
 class DetailWindow:
     def __init__(self, root, image_url, title, description):
+        if not (0 <= len(description) <= 300):
+            messagebox.showerror("Error", "La descripción debe tener entre 100 y 200 caracteres.")
+            return  # Retorna desde el método __init__, por lo que no se creará la ventana.
+
         self.root = Toplevel(root)  
         self.root.title("Detalle")
 
@@ -23,7 +27,9 @@ class DetailWindow:
         except requests.RequestException as e:
             print(f"Error al recuperar la imagen: {e}")
             messagebox.showerror("Error", f"Error al cargar la imagen: {e}")
-        
+         
+
+        # Crea y muestra una etiqueta con la descripción.
         Label(self.root, text=description, wraplength=200).pack()
         
         self.root.update_idletasks()
