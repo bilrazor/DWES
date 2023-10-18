@@ -5,7 +5,7 @@ from io import BytesIO
 
 class DetailWindow:
     def __init__(self, root, image_url, title, description):
-        if not (0 <= len(description) <= 300):
+        if not (100 <= len(description) <= 200):
             messagebox.showerror("Error", "La descripción debe tener entre 100 y 200 caracteres.")
             return  # Retorna desde el método __init__, por lo que no se creará la ventana.
 
@@ -31,9 +31,9 @@ class DetailWindow:
 
         # Crea y muestra una etiqueta con la descripción.
         Label(self.root, text=description, wraplength=200).pack()
-        
         self.root.update_idletasks()
         x = ( self.root.winfo_screenwidth() - self.root.winfo_reqwidth()) / 2
         y = ( self.root.winfo_screenheight() - self.root.winfo_reqheight()) / 2
         self.root.geometry(f"+{int(x)}+{int(y)}")
+  
         
