@@ -9,6 +9,9 @@
             android:id="@+id/nav_gallery"
 
             android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/buttonOne"
+            android:title="@string/menu_third_item" />
 
     </group>
 </menu>
