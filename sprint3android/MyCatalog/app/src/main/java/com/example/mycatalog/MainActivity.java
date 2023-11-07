@@ -15,73 +15,79 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 
-// La clase MainActivity se extiende de AppCompatActivity y usa la interfaz NavigationView.OnNavigationItemSelectedListener
-// para manejar los eventos de selección de elementos en la navegación.
+
+// Extiende AppCompatActivity para heredar funcionalidades de la compatibilidad de ActionBar.
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    // onCreate es el primer método que se llama en el ciclo de vida de la actividad.
+    // onCreate es el primer método llamado al crear la actividad.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Establece la vista de la actividad desde el archivo de layout XML.
+        // Establece el diseño de la actividad a partir del archivo XML.
         setContentView(R.layout.main_activity);
 
-        // Encuentra la barra de herramientas definida en el layout y la establece como la barra de acciones para esta actividad.
+        // Encuentra la barra de herramientas y la establece como la ActionBar de la actividad.
         Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        // Encuentra el DrawerLayout que permitirá mostrar el menú de navegación deslizable.
+        // Encuentra el DrawerLayout que se usará para el menú deslizante.
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
-        // Crea un botón de alternancia para que el menú de navegación se pueda abrir y cerrar.
+        // Configura un ActionBarDrawerToggle que vincula el DrawerLayout y la Toolbar.
+        // Este controlador también gestionará los estados abiertos/cerrados del menú deslizante.
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        // Agrega un listener al DrawerLayout para responder a los eventos de apertura y cierre del menú.
+        // Añade un listener al DrawerLayout para responder a los eventos de abrir/cerrar.
         drawer.addDrawerListener(toggle);
-
-        // Sincroniza el estado del botón de alternancia después de que se haya agregado el listener.
+        // Sincroniza el estado del ActionBarDrawerToggle después de que el DrawerLayout esté configurado.
         toggle.syncState();
 
-        // Encuentra la NavigationView y establece esta clase como la que manejará los eventos de selección de elementos.
+        // Encuentra la NavigationView y establece esta actividad como la que manejará los eventos de selección de ítems.
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Si la actividad se está creando por primera vez (por ejemplo, no después de un cambio de orientación),
+        // entonces se inserta el fragmento AboutFragment por defecto.
+        if (savedInstanceState == null) {
+            // Crea una instancia de AboutFragment.
+            Fragment fragment = new AboutFragment();
+            // Utiliza el FragmentManager para comenzar una transacción y reemplazar cualquier contenido existente con este fragmento.
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment)
+                    .commit();
+            // Marca el ítem en la NavigationView que corresponde a AboutFragment.
+            navigationView.setCheckedItem(R.id.nav_fragment1);
+        }
     }
 
-    // Este método se llama cada vez que se selecciona un elemento en el menú de navegación.
+    // Este método maneja la selección de ítems en la NavigationView.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Inicializa el fragmento que se mostrará como null al principio.
+        // Inicialmente establece el fragmento a mostrar como nulo.
         Fragment fragment = null;
 
-        // Obtiene el ID del elemento seleccionado en el menú.
+        // Obtiene el ID del ítem seleccionado.
         int id = item.getItemId();
 
-        // Comprueba el ID del elemento seleccionado y crea el fragmento correspondiente.
+        // Crea una instancia del fragmento correspondiente al ítem seleccionado.
         if (id == R.id.nav_fragment1) {
-            fragment = new AboutFragment(); // Crea un fragmento AboutFragment si se selecciona la primera opción.
-        } else if (id == R.id.nav_fragment2) {
-            fragment = new CatalogActivity(); // Crea un CatalogActivity si se selecciona la segunda opción.
-        }
-
-        // Si ningún fragmento fue seleccionado, selecciona AboutFragment como predeterminado.
-        if (fragment == null){
             fragment = new AboutFragment();
+        } else if (id == R.id.nav_fragment2) {
+            // Asegúrate de que CatalogActivity es realmente un Fragment para poder ser utilizado aquí.
+            // Si no es así, necesitarás ajustar este código.
+            fragment = new CatalogActivity();
         }
 
-        // Si se seleccionó un fragmento, reemplaza el contenido actual con el nuevo fragmento.
+        // Si se seleccionó un fragmento válido, inicia una transacción de fragmentos para mostrarlo.
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.nav_host_fragment, fragment)
                     .commit();
         }
 
-        // Cierra el menú de navegación una vez que se selecciona un elemento.
+        // Cierra el menú deslizante una vez que se ha realizado una selección.
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
-        // Devuelve true porque el evento de selección ha sido manejado.
+        // Devuelve verdadero para indicar que el evento de selección fue manejado.
         return true;
     }
-
 }
