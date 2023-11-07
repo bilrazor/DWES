@@ -7,17 +7,13 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.mycatalog.Fragment1"
+        android:name="com.example.mycatalog.AboutFragment"
         android:label="fragment_1"
-        tools:layout="@layout/fragment_1" />
+        tools:layout="@layout/about_fragment" />
     <fragment
         android:id="@+id/fragment2"
-        android:name="com.example.mycatalog.Fragment2"
+        android:name="com.example.mycatalog.CatalogActivity"
         android:label="fragment_2"
-        tools:layout="@layout/fragment_2" />
-    <fragment
-        android:id="@+id/fragment3"
-        android:name="com.example.mycatalog.Fragment3"
-        android:label="fragment_3"
-        tools:layout="@layout/fragment_3" />
+        tools:layout="@layout/catalog_activity" />
+
 </navigation>
