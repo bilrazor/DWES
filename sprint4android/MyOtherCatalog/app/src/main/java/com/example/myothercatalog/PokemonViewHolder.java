@@ -28,5 +28,8 @@ public class PokemonViewHolder extends RecyclerView.ViewHolder {
                // .error(R.drawable.placeholder) // Placeholder image in case of an error
                 .into(imageView);
     }
+    public void setOnClickListener(View.OnClickListener listener) {
+        itemView.setOnClickListener(listener);
+    }
 }
 

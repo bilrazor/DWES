@@ -1,6 +1,7 @@
 package com.example.myothercatalog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,14 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonView
     public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
         PokemonData dataInPositionToBeRendered = allTheData.get(position);
         holder.showData(dataInPositionToBeRendered , activity);
-
+        holder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, DetailActivity.class);
+                // Aquí puedes añadir extras al intent si necesitas pasar datos a DetailActivity
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
