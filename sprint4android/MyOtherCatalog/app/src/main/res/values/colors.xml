@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="my_primary_color">#020202</color>
+    <color name="my_primary_color">#2755E1</color>
     <color name="my_primary_dark_color">#00574B</color>
     <color name="my_on_primary_color">#FFFFFF</color>
     <color name="my_text_color">#FFFFFF</color>
     <color name="my_window_background">#FFFFFF</color>
     <color name="my_button_text_color">#FFFFFFFF</color>
-
+    <color name="my_title_text_color">#FFFFFF</color>
+    <color name="my_page_color">#48FF3AE5</color>
+    <color name="back_ground_color">#AB5B71DF</color>
 
 </resources>
