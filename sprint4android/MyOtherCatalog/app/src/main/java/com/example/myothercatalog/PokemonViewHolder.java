@@ -1,6 +1,7 @@
 package com.example.myothercatalog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,8 +26,19 @@ public class PokemonViewHolder extends RecyclerView.ViewHolder {
         textView.setText(data.getName());
         Glide.with(itemView.getContext())
                 .load(data.getImageUrl())
-               // .error(R.drawable.placeholder) // Placeholder image in case of an error
                 .into(imageView);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, DetailActivity.class);
+                intent.putExtra("name", data.getName());
+                intent.putExtra("imageUrl", data.getImageUrl());
+                // Si tienes una descripción, también puedes pasarla aquí
+                intent.putExtra("description", data.getDescription());
+                activity.startActivity(intent);
+            }
+        });
     }
     public void setOnClickListener(View.OnClickListener listener) {
         itemView.setOnClickListener(listener);

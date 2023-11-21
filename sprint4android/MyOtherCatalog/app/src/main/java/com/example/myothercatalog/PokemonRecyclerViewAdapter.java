@@ -32,16 +32,9 @@ public class PokemonRecyclerViewAdapter extends RecyclerView.Adapter<PokemonView
     @Override
     public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
         PokemonData dataInPositionToBeRendered = allTheData.get(position);
-        holder.showData(dataInPositionToBeRendered , activity);
-        holder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, DetailActivity.class);
-                // Aquí puedes añadir extras al intent si necesitas pasar datos a DetailActivity
-                activity.startActivity(intent);
-            }
-        });
+        holder.showData(dataInPositionToBeRendered, activity);
     }
+
 
     @Override
     public int getItemCount() {
