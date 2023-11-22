@@ -13,17 +13,16 @@
     </style>
 
     <style name="MyMaterialButtonStyle" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@drawable/my_button_background</item>
+        <item name="android:background">@drawable/my_button_background</item>
         <item name="android:textColor">@color/my_button_text_color</item>
     </style>
     <style name="MyMaterialTitleStyle" parent="TextAppearance.AppCompat.Headline">
         <item name="android:textColor">@color/my_title_text_color</item>
         <item name="android:textSize">20sp</item>
-        <!-- Cualquier otra personalización de texto que necesites -->
     </style>
     <style name="MyMaterialPageStyle" parent="Theme.AppCompat.Light">
         <item name="android:background">@color/my_page_color</item>
-        <!-- Otros atributos de estilo -->
+
     </style>
 
     <style name="Theme.MyOtherCatalog" parent="Base.Theme.MyOtherCatalog" />

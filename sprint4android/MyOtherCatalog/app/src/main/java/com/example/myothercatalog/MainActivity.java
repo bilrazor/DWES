@@ -26,35 +26,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private Context context = this;
+    private Context context = this; // Contexto de la actividad
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // Establece el layout para la actividad
 
+        // Inicialización del RecyclerView en la interfaz de usuario
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        Activity activity = this;
 
+        // Lista para almacenar los datos de los Pokémon
         List<PokemonData> allTheRobots = new ArrayList<>();
-       /* data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        data.add(new PokemonData("Bukbasaur" ,"https://raw.githubusercontent.com/bilrazor/DWES/main/resources/imagen1Edited.png"));
-        PokemonRecyclerViewAdapter adapter = new PokemonRecyclerViewAdapter(data , this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }*/
-       /* Button buttonMain = findViewById(R.id.button_main);
-        buttonMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                context.startActivity(intent);
-            }
-        });*/
+
+        // Solicitud de red para obtener datos de Pokémon
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 "https://raw.githubusercontent.com/CarlosAfundacion/catalog/main/catalog.json",
@@ -62,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        // Procesa cada objeto JSON y lo añade a la lista
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject robot = response.getJSONObject(i);
@@ -71,22 +57,22 @@ public class MainActivity extends AppCompatActivity {
                                 throw new RuntimeException(e);
                             }
                         }
-                        PokemonRecyclerViewAdapter adapter = new PokemonRecyclerViewAdapter(allTheRobots, activity);
+                        // Configura el adaptador del RecyclerView y el LayoutManager
+                        PokemonRecyclerViewAdapter adapter = new PokemonRecyclerViewAdapter(allTheRobots, MainActivity.this);
                         recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        // Maneja errores de la solicitud de red
                     }
-
                 }
-
         );
-        RequestQueue cola = Volley.newRequestQueue(this);
-        cola.add(request);
+
+        // Añade la solicitud a la cola de solicitudes de Volley
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
     }
 }

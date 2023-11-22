@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/firstText"
+        style="@style/MyMaterialTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -38,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Button "me gusta" -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
